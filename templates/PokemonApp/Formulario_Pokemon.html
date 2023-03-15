@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+  {% load static %}
+
+{% block cambios %}
+
+<section class="page-section portfolio" id="{% url 'Pokemon' %}">
+    <div class="container">
+        <!-- Portfolio Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Registar un Pokémon</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+    </div>
+</section>
+    <div class="container text-center ">
+
+    <form action="{% url 'Pokemon' %}" method="post" >
+          {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Guardar">
+    </form>
+
+    </div>
+
+<table class="table">
+  <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Tipo 1</th>
+        <th scope="col">Tipo 2</th>
+        <th scope="col">Imagen</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for pokemon in pokemons %}
+    <tr>
+
+      <th scope="row" style="vertical-align:middle;">{{pokemon.id}}</th>
+
+      <td style="vertical-align:middle;">{{pokemon.nombre}}</td>
+      <td style="vertical-align:middle;">{{pokemon.tipo1}}</td>
+      <td style="vertical-align:middle;">{{pokemon.tipo2}}</td>
+      <td style="vertical-align:middle;"><img src="{{pokemon.url_img}}" width="100"></td>
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

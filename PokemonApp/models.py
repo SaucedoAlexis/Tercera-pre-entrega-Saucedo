@@ -1,14 +1,14 @@
 
 from django.db.models import Model
-from django.db.models import CharField, PositiveIntegerField, URLField
+from django.db.models import CharField, IntegerField, URLField
 
 
 # Create your models here.
 class Pokemon(Model):
-    id = PositiveIntegerField(primary_key=True)
+    id = IntegerField(primary_key=True, unique=True)
     nombre = CharField(max_length=40)
     tipo1 = CharField(max_length=40)
-    tipo2 = CharField(max_length=40)
+    tipo2 = CharField(max_length=40, default='No tiene')
     url_img = URLField(max_length=200)
 
 

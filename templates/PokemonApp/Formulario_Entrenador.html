@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+  {% load static %}
+
+{% block cambios %}
+
+
+<section class="page-section portfolio" id="{% url 'Entrenador' %}">
+    <div class="container">
+        <!-- Portfolio Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Registar un Entrenador</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+    </div>
+</section>
+    <div class="container text-center ">
+
+    <form action="{% url 'Entrenador' %}" method="post">
+            {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Guardar">
+    </form>
+
+    </div>
+
+<table class="table">
+  <thead>
+    <tr >
+
+        <th scope="col">Nombre</th>
+        <th scope="col">Genero</th>
+        <th scope="col">Region</th>
+        <th scope="col">Clase</th>
+        <th scope="col">Imagen</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for entrenador in entrenadores %}
+    <tr>
+
+      <th scope="row" style="vertical-align:middle;">{{entrenador.nombre}}</th>
+
+      <td style="vertical-align:middle;">{{entrenador.genero}}</td>
+      <td style="vertical-align:middle;">{{entrenador.region}}</td>
+      <td style="vertical-align:middle;">{{entrenador.clase}}</td>
+
+      <td><img src="{{entrenador.url_img}}" width="100"></td>
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

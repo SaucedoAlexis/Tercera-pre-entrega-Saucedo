@@ -49,7 +49,10 @@
       <td style="vertical-align:middle;">{{entrenador.region}}</td>
       <td style="vertical-align:middle;">{{entrenador.clase}}</td>
 
-      <td><img src="{{entrenador.url_img}}" width="100"></td>
+      <td style="vertical-align:middle;">
+          <a href="{{entrenador.url_img}}" target="_blank">
+          <img src="{{entrenador.url_img}}" width="100"></a>
+      </td>
 
     </tr>
     {% endfor %}

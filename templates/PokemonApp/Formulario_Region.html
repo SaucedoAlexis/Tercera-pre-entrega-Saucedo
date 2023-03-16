@@ -3,7 +3,7 @@
 
 {% block cambios %}
 
-<section class="page-section portfolio" id="Pokemon">
+<section class="page-section portfolio" id="{% url 'Region' %}">
     <div class="container">
         <!-- Portfolio Section Heading-->
         <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Registar una Región</h2>
@@ -15,5 +15,49 @@
         </div>
     </div>
 </section>
+<!-- Formulario -->
+
+    <div class="container text-center">
+        <form action="{% url 'Region' %}" method="post" >
+              {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Guardar">
+        </form>
+    </div>
+
+<!-- Tabla Vista -->
+<table class="table">
+  <thead>
+    <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Profesor</th>
+        <th scope="col">Villanos</th>
+        <th scope="col">Capital</th>
+        <th scope="col">Liga Pokémon</th>
+        <th scope="col">Mapa</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for region in regiones %}
+    <tr>
+        <!-- Llenado de las columnas -->
+      <th scope="row" style="vertical-align:middle;">{{region.nombre}}</th>
+      <td style="vertical-align:middle;">{{region.profesor}}</td>
+      <td style="vertical-align:middle;">{{region.villanos}}</td>
+      <td style="vertical-align:middle;">{{region.capital}}</td>
+      <td style="vertical-align:middle;">{{region.liga_pokemon}}</td>
+        <!-- Imagen -->
+      <td style="vertical-align:middle;">
+          <a href="{{region.url_img}}" target="_blank">
+          <img src="{{region.url_img}}" width="100"></a>
+      </td>
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
 
 {% endblock %}

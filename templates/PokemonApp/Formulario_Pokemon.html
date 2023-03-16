@@ -46,7 +46,11 @@
       <td style="vertical-align:middle;">{{pokemon.nombre}}</td>
       <td style="vertical-align:middle;">{{pokemon.tipo1}}</td>
       <td style="vertical-align:middle;">{{pokemon.tipo2}}</td>
-      <td style="vertical-align:middle;"><img src="{{pokemon.url_img}}" width="100"></td>
+      <!-- Imagen -->
+      <td style="vertical-align:middle;">
+          <a href="{{pokemon.url_img}}" target="_blank">
+          <img src="{{pokemon.url_img}}" width="100"></a>
+      </td>
 
     </tr>
     {% endfor %}

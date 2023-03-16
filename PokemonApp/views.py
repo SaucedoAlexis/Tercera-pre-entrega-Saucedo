@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from PokemonApp.forms import PokemonFormulario, EntrenadorFormulario
-from PokemonApp.models import Pokemon, Entrenador
+from PokemonApp.forms import PokemonFormulario, EntrenadorFormulario, RegionFormulario
+from PokemonApp.models import Pokemon, Entrenador, Region
+
 
 # Create your views here.
 
@@ -55,4 +56,21 @@ def ingresar_entrenador(request):
     return render(request, 'PokemonApp/Formulario_Entrenador.html', context=context)
 
 def ingresar_region(request):
-    return render(request, 'PokemonApp/Formulario_Region.html')
+    all_region = Region.objects.all()
+
+    if request.method == 'POST':
+        formulario = RegionFormulario(request.POST)
+
+        if formulario.is_valid():
+            data = formulario.cleaned_data
+            region = Region(profesor=data['profesor'], villanos=data['villanos'],
+                            capital=data['capital'], liga_pokemon=data['liga_pokemon'],
+                            url_img=data['url_img'], nombre=data['nombre']
+                            )
+            region.save()
+
+    context = {
+        'regiones': all_region,
+        'form': RegionFormulario()
+    }
+    return render(request, 'PokemonApp/Formulario_Region.html',context=context)

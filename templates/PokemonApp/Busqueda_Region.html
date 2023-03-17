@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block cambios %}
+    {% if regiones %}
+        {% for region in regiones %}
+            <div class="container text-center">
+              <div class="row">
+                <div class="col" >
+                  <ul class="list-group" style="margin-top:5rem">
+                      <li class="list-group-item">Id: {{region.id}}</li>
+                      <li class="list-group-item">Nombre: {{region.nombre}}</li>
+                      <li class="list-group-item">Tipo 1: {{region.tipo1}}</li>
+                      <li class="list-group-item">Tipo 2: {{region.tipo2}}</li>
+
+                  </ul>
+                </div>
+                <div class="col">
+                  <a href="{{region.url_img}}" target="_blank"><img src="{{region.url_img}}" class="img-fluid" style='margin-top:1rem' width="400px" alt="Imagen del pokemon"></a>
+                </div>
+              </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-danger mt-5" role="alert">
+          No se ha Encontrado ninguna Región con ese nombre
+        </div>
+    {% endif %}
+{% endblock %}

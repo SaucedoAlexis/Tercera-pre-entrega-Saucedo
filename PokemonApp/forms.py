@@ -22,3 +22,15 @@ class RegionFormulario(forms.Form):
     capital = forms.CharField(min_length=3)
     liga_pokemon = forms.CharField(min_length=4)
     url_img = forms.URLField(max_length=200)
+
+class BusquedaPokemonFormulario(forms.Form):
+
+    nombre = forms.CharField(min_length=3)
+
+
+class BusquedaEntrenadorFormulario(forms.Form):
+    nombre = forms.CharField(min_length=3)
+
+class BusquedaRegionFormulario(forms.Form):
+    nombre = forms.CharField(min_length=3)
+

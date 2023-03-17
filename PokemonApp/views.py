@@ -1,12 +1,50 @@
 from django.shortcuts import render
-from PokemonApp.forms import PokemonFormulario, EntrenadorFormulario, RegionFormulario
+
+from PokemonApp.forms import PokemonFormulario, EntrenadorFormulario, RegionFormulario, \
+    BusquedaPokemonFormulario, BusquedaEntrenadorFormulario, BusquedaRegionFormulario
 from PokemonApp.models import Pokemon, Entrenador, Region
 
 
 # Create your views here.
+def buscar_pokemon(request):
+    formulario = BusquedaPokemonFormulario(request.GET)
+    if formulario.is_valid():
+        data = formulario.cleaned_data
+        pokemon_filtrado = Pokemon.objects.filter(nombre__icontains=data['nombre'])
+        context = {
+            'pokemons': pokemon_filtrado
+        }
+        return render(request,'PokemonApp/Busqueda_Pokemon.html', context=context)
+
+def buscar_entrenador(request):
+    formulario = BusquedaEntrenadorFormulario(request.GET)
+    if formulario.is_valid():
+        data = formulario.cleaned_data
+        entrenador_filtrado = Entrenador.objects.filter(nombre__icontains=data['nombre'])
+        context = {
+            'entrenadores': entrenador_filtrado
+        }
+        return render(request, 'PokemonApp/Busqueda_Entrenador.html', context=context)
+
+def buscar_region(request):
+    formulario = BusquedaRegionFormulario(request.GET)
+    if formulario.is_valid():
+        data = formulario.cleaned_data
+        region_filtrada = Region.objects.filter(nombre__icontains=data['nombre'])
+        context = {
+            'regiones': region_filtrada
+        }
+        return render(request, 'PokemonApp/Busqueda_Region.html', context=context)
+
 
 def buscar(request):
-    return render(request,'base.html')
+    context = {
+        'form_busqueda_pokemon' : BusquedaPokemonFormulario(),
+        'form_busqueda_entrenador': BusquedaEntrenadorFormulario(),
+        'form_busqueda_region': BusquedaRegionFormulario()
+    }
+
+    return render(request,'base.html', context=context)
 
 def ingresar_pokemon(request):
 
@@ -74,3 +112,4 @@ def ingresar_region(request):
         'form': RegionFormulario()
     }
     return render(request, 'PokemonApp/Formulario_Region.html',context=context)
+

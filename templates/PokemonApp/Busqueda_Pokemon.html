@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block cambios %}
+    {% if pokemons %}
+        {% for pokemon in pokemons %}
+            <div class="container text-center">
+              <div class="row">
+                <div class="col" >
+                  <ul class="list-group" style="margin-top:5rem">
+                      <li class="list-group-item">Id: {{pokemon.id}}</li>
+                      <li class="list-group-item">Nombre: {{pokemon.nombre}}</li>
+                      <li class="list-group-item">Tipo 1: {{pokemon.tipo1}}</li>
+                      <li class="list-group-item">Tipo 2: {{pokemon.tipo2}}</li>
+
+                  </ul>
+                </div>
+                <div class="col">
+                    <a href="{{pokemon.url_img}}" target="_blank">
+                  <img src="{{pokemon.url_img}}" class="img-fluid" style='margin-top:1rem' width="300px" alt="Imagen del pokemon">
+                    </a>
+                </div>
+              </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-danger mt-5" role="alert">
+          No se ha Encontrado ningún Pokémon con ese nombre
+        </div>
+    {% endif %}
+{% endblock %}

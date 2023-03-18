@@ -7,12 +7,12 @@ from PokemonApp.models import Pokemon, Entrenador, Region
 
 # Create your views here.
 def buscar_pokemon(request):
-    formulario = BusquedaPokemonFormulario(request.GET)
-    if formulario.is_valid():
-        data = formulario.cleaned_data
-        pokemon_filtrado = Pokemon.objects.filter(nombre__icontains=data['nombre'])
+    formulario = BusquedaPokemonFormulario(request.GET) #obtención de datos del request
+    if formulario.is_valid(): #validación
+        data = formulario.cleaned_data #limpieza y transformación a dict
+        pokemon_filtrado = Pokemon.objects.filter(nombre__icontains=data['nombre']) #aplicado de filtro
         context = {
-            'pokemons': pokemon_filtrado
+            'pokemons': pokemon_filtrado #variable para usar en el template y sus datos asignados
         }
         return render(request,'PokemonApp/Busqueda_Pokemon.html', context=context)
 
@@ -48,21 +48,21 @@ def buscar(request):
 
 def ingresar_pokemon(request):
 
-    if request.method == 'POST':
-        formulario = PokemonFormulario(request.POST)
-        if formulario.is_valid():
-            data = formulario.cleaned_data
+    if request.method == 'POST': #condicional del método usado
+        formulario = PokemonFormulario(request.POST) #obtención de datos del request
+        if formulario.is_valid(): #validación de los datos
+            data = formulario.cleaned_data #limpieza y transformación a dict
             pokemon = Pokemon(id=int(data['id']), nombre=data['nombre'], tipo1=data['tipo1'],
                               tipo2=data['tipo2'], url_img=data['url_img']
-                              )
-            pokemon.save()
+                              )#creación del objeto
+            pokemon.save()#guardado en la base de datos
 
-    all_pokemons = Pokemon.objects.all()
+    all_pokemons = Pokemon.objects.all() #obtención de todos los objetos de la base de datos
 
     context = {
         'pokemons': all_pokemons,
         'form': PokemonFormulario()
-    }
+    } # variables y asignación de datos para el uso en el template
 
 
     return render(request, 'PokemonApp/Formulario_Pokemon.html', context=context)

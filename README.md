@@ -12,7 +12,7 @@ Estas secciones se encuentran en la página http://127.0.0.1:8000/PokemonApp/ la
 
 ## Buscar
 
-Como ya se ha mencionado, esta es la página de inicio, donde se podrán encontrar 3 formularios de búsqueda que corresponden a las otras secciones, comprende un cuadro de inputo del tipo texto donde se pondrá el nombre del entrenador, pokemon o region y al precionar en buscar nos llevará a una vista con el o los resultados. En caso de no encontrar resultado, se mostrará un mensaje en la página.
+Como ya se ha mencionado, esta es la página de inicio, donde se podrán encontrar 3 formularios de búsqueda que corresponden a los objetos de las otras secciones, comprende un cuadro de input del tipo texto donde se pondrá el nombre del entrenador, pokemon o region y al presionar en buscar nos llevará a una vista con el o los resultados. En caso de no encontrar resultado, se mostrará un mensaje en la página.
 
 ## Pokemon
 

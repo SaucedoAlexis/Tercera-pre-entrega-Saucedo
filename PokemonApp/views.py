@@ -14,7 +14,8 @@ def buscar_pokemon(request):
         context = {
             'pokemons': pokemon_filtrado #variable para usar en el template y sus datos asignados
         }
-        return render(request,'PokemonApp/Busqueda_Pokemon.html', context=context)
+        return render(request,'PokemonApp/Resultado_Busqueda_Pokemon.html', context=context)
+
 
 def buscar_entrenador(request):
     formulario = BusquedaEntrenadorFormulario(request.GET)
@@ -24,7 +25,7 @@ def buscar_entrenador(request):
         context = {
             'entrenadores': entrenador_filtrado
         }
-        return render(request, 'PokemonApp/Busqueda_Entrenador.html', context=context)
+        return render(request, 'PokemonApp/Resultado_Busqueda_Entrenador.html', context=context)
 
 def buscar_region(request):
     formulario = BusquedaRegionFormulario(request.GET)
@@ -34,7 +35,7 @@ def buscar_region(request):
         context = {
             'regiones': region_filtrada
         }
-        return render(request, 'PokemonApp/Busqueda_Region.html', context=context)
+    return render(request, 'PokemonApp/Resultado_Busqueda_Reion.html', context=context)
 
 
 def buscar(request):
@@ -57,16 +58,21 @@ def ingresar_pokemon(request):
                               )#creación del objeto
             pokemon.save()#guardado en la base de datos
 
-    all_pokemons = Pokemon.objects.all() #obtención de todos los objetos de la base de datos
-
-    context = {
-        'pokemons': all_pokemons,
-        'form': PokemonFormulario()
-    } # variables y asignación de datos para el uso en el template
 
 
-    return render(request, 'PokemonApp/Formulario_Pokemon.html', context=context)
+        context = {
+            'form': PokemonFormulario(),
+            'msg': 'Ok'
+        } # variables y asignación de datos para el uso en el template
 
+
+        return render(request, 'PokemonApp/Formulario_Pokemon.html', context=context)
+
+    return render(request, 'PokemonApp/Formulario_Pokemon.html', context={'form':PokemonFormulario()})
+
+def mostrar_pokemons(request):
+    all_pokemons = Pokemon.objects.all()
+    return render(request,'PokemonApp/Mostrar_Pokemons.html', {'pokemons':all_pokemons})
 
 
 

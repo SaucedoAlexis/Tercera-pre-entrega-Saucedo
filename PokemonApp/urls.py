@@ -9,5 +9,6 @@ urlpatterns = [
     path('buscar_entrenador', buscar_entrenador,name='BuscarEntrenador'),
     path('pokemon', ingresar_pokemon, name='Pokemon'),
     path('entrenador', ingresar_entrenador, name='Entrenador'),
-    path('region', ingresar_region, name='Region')
+    path('region', ingresar_region, name='Region'),
+    path('Mostrar_Pokemons', mostrar_pokemons,name='MostrarPokemons')
 ]

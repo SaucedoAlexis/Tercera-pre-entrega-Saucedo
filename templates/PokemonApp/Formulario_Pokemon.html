@@ -2,6 +2,11 @@
   {% load static %}
 
 {% block cambios %}
+{% if msg%}
+    <div class="alert alert-success" role="alert">
+        Pokemon registrado Exitosamente
+    </div>
+{% endif %}
 
 <section class="page-section portfolio" id="{% url 'Pokemon' %}">
     <div class="container">
@@ -25,36 +30,6 @@
 
     </div>
 
-<table class="table text-center">
-  <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Tipo 1</th>
-        <th scope="col">Tipo 2</th>
-        <th scope="col">Imagen</th>
 
-    </tr>
-  </thead>
-
-  <tbody>
-    {% for pokemon in pokemons %}
-    <tr>
-
-      <th scope="row" style="vertical-align:middle;">{{pokemon.id}}</th>
-
-      <td style="vertical-align:middle;">{{pokemon.nombre}}</td>
-      <td style="vertical-align:middle;">{{pokemon.tipo1}}</td>
-      <td style="vertical-align:middle;">{{pokemon.tipo2}}</td>
-      <!-- Imagen -->
-      <td style="vertical-align:middle;">
-          <a href="{{pokemon.url_img}}" target="_blank">
-          <img src="{{pokemon.url_img}}" width="100"></a>
-      </td>
-
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
 
 {% endblock %}

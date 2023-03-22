@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block cambios %}
+   <form action="{% url 'EncontrarRegion' %}" method='get'>
+      {{form_region.as_p}}
+      <input type="submit" class="btn btn-primary" value="Buscar!">
+   </form>
+{% endblock %}

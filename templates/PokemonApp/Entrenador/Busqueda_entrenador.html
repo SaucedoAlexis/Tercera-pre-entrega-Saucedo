@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block cambios %}
+
+    <form method='get' action="{% url 'EncontrarEntrenador' %}">
+        {{form_busqueda.as_p}}
+    
+        <input type="submit" class="btn btn-primary" value="Buscar!">
+    </form>
+
+{% endblock %}

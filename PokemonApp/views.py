@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from PokemonApp.forms import PokemonFormulario, EntrenadorFormulario, RegionFormulario, \
     BusquedaPokemonFormulario, BusquedaEntrenadorFormulario, BusquedaRegionFormulario
@@ -7,6 +7,8 @@ from PokemonApp.models import Pokemon, Entrenador, Region
 
 # Create your views here.
 # Pokemons
+
+
 def encontrar_pokemon(request):
     
     formulario = BusquedaPokemonFormulario(
@@ -54,6 +56,12 @@ def mostrar_pokemons(request):
 #Fin Pokemons
 
 #Comienzo Entrenadores
+
+def eliminar_entrenador(request,nombre):
+    get_entrenador = Entrenador.objects.get(nombre=nombre)
+    get_entrenador.delete()
+    return redirect('MostrarEntrenadores')
+
 def mostrar_entrenadores(request):
     all_trainers = Entrenador.objects.all()
     return render(request,
@@ -96,6 +104,35 @@ def ingresar_entrenador(request):
         }
         return render(request, 'PokemonApp/Entrenador/Formulario_Entrenador.html', context=context)
     return render(request, 'PokemonApp/Entrenador/Formulario_Entrenador.html', {'form':EntrenadorFormulario()})
+
+def editar_entrenador(request,nombre):
+
+    if request.method == 'POST':
+        formulario = EntrenadorFormulario(request.POST)
+
+        if formulario.is_valid():
+            data = formulario.cleaned_data
+            entrenador = Entrenador(nombre=data['nombre'], genero=data['genero'],
+                                    region=data['region'], clase=data['clase'],
+                                    url_img=data['url_img']
+                                    )
+            entrenador.save()
+
+
+    
+        
+        return redirect('MostrarEntrenadores')
+    get_entrenador = Entrenador.objects.get(nombre=nombre)
+    context = {
+        'form':EntrenadorFormulario(initial={
+        "nombre": get_entrenador.nombre,
+        "genero": get_entrenador.genero,
+        "region": get_entrenador.region,
+        "clase": get_entrenador.clase,
+        "url_img": get_entrenador.url_img
+        })
+    }
+    return render(request, 'PokemonApp/Entrenador/Formulario_Entrenador.html', context=context)
 #Fin Entrenadores
 
 #Comienzo Regiones

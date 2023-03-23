@@ -9,6 +9,7 @@
             <th scope="col">Region</th>
             <th scope="col">Clase</th>
             <th scope="col">Imagen</th>
+            <th scope="col">Acciones</th>
         </tr>
     </thead>
 
@@ -23,10 +24,19 @@
     <td style="vertical-align:middle;">{{entrenador.region}}</td>
     <td style="vertical-align:middle;">{{entrenador.clase}}</td>
     
+    
+    
     <!-- Imagen -->
     <td style="vertical-align:middle;">
         <a href="{{entrenador.url_img}}" target="_blank">
         <img src="{{entrenador.url_img}}" width="100"></a>
+    </td>
+
+    <!-- Update,Erase -->
+    <td style="vertical-align:middle;">
+
+        <a href="{% url 'EliminarEntrenador' entrenador.nombre %}">Borrar</a>
+        <a href="{% url 'EditarEntrenador' entrenador.nombre %}">Editar</a>
     </td>
 
 </tr>

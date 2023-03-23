@@ -3,7 +3,7 @@ from django.urls import path
 from PokemonApp.views import *
 
 urlpatterns = [
-    path('', buscar, name='Buscar'),
+    path('', buscar, name='Inicio'),
     #Pokemons
     path('buscar_pokemon', busqueda_pokemon ,name='BuscarPokemon'),
     path('busqueda_pokemon', encontrar_pokemon, name='EncontrarPokemon'),

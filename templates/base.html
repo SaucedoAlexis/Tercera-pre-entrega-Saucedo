@@ -24,7 +24,7 @@
 <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
     <div class="container">
         <img src="{% static 'assets/img/pikachu.gif' %}" alt="Imagen de pikachu" width="140" height="100" class=""/>
-        <a class="navbar-brand " href="#page-top">Pokémon App</a>
+        <a class="navbar-brand " href="{% url 'Inicio'%}">Pokémon App</a>
         <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button"
                 data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -105,10 +105,10 @@
 </header>
 <!-- Portfolio Section-->
 {% block cambios %}
-<section class="page-section portfolio" id="{% url 'Buscar' %}">
+<section class="page-section portfolio" id="{% url 'Inicio' %}">
     <div class="container">
         <!-- Portfolio Section Heading-->
-        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Búsqueda</h2>
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Bienvenido</h2>
         <!-- Icon Divider-->
         <div class="divider-custom">
             <div class="divider-custom-line"></div>
@@ -122,56 +122,7 @@
 <div class="container text-center">
     <div class="row ">
         <!-- Buscar Pokemon-->
-        <div class="col">
-            <div class="card" style="margin-bottom: 2rem;">
-                <img src="https://e00-marca.uecdn.es/assets/multimedia/imagenes/2021/02/23/16140823976294.jpg"
-                     class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Ingrese el Pokémon que busca</h5>
-                    <form action="{% url 'BuscarPokemon' %}" method="get">
-
-
-                        {{form_busqueda_pokemon.as_p}}
-                        <input type="submit" class="btn btn-primary" value="Buscar!">
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Buscar Entrenador-->
-        <div class="col">
-            <div class="card" style="margin-bottom: 2rem;">
-                <img src="https://i.pinimg.com/736x/e4/19/0c/e4190cd99d0932bc4acce234262ddadc.jpg" class="card-img-top"
-                     alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Ingrese el Entrenador que busca</h5>
-                    <form action="{% url 'BuscarEntrenador' %}" method="get">
-
-
-                        {{form_busqueda_entrenador.as_p}}
-                        <input type="submit" class="btn btn-primary" value="Buscar!">
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- Buscar Region-->
-        <div class="col">
-            <div class="card" style="margin-bottom: 2rem;">
-                <img src="https://easycdn.es/1/imagenes/pokemon-escarlata-y-pokemon-purpura-nintendo-switch_345649_post.jpg"
-                     class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Ingrese la región que busca</h5>
-                    <form action="{% url 'BuscarRegion' %}" method="get">
-
-
-                        {{form_busqueda_region.as_p}}
-                        <input type="submit" class="btn btn-primary" value="Buscar!">
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+        
 {% endblock %}
 
 

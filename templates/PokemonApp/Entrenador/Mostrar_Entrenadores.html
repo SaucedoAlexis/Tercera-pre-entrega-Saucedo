@@ -1,52 +1,16 @@
-{% extends "base.html" %}
-
-{% block cambios %}
-<table class="table text-center">
-    <thead>
-        <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Genero</th>
-            <th scope="col">Region</th>
-            <th scope="col">Clase</th>
-            <th scope="col">Imagen</th>
-            <th scope="col">Acciones</th>
-        </tr>
-    </thead>
-
-    <tbody>
-{% if entrenadores %}
-
-{% for entrenador in entrenadores %}
-<tr>
-    <!-- Llenado de las columnas -->
-    <th scope="row" style="vertical-align:middle;">{{entrenador.nombre}}</th>
-    <td style="vertical-align:middle;">{{entrenador.genero}}</td>
-    <td style="vertical-align:middle;">{{entrenador.region}}</td>
-    <td style="vertical-align:middle;">{{entrenador.clase}}</td>
-    
-    
-    
-    <!-- Imagen -->
+{% extends 'Mostrar.html' %}
+{% block columnas %}
+    <th scope="row" style="vertical-align:middle;">{{object.nombre}}</th>
+    <td style="vertical-align:middle;">{{object.genero}}</td>
+    <td style="vertical-align:middle;">{{object.region}}</td>
+    <td style="vertical-align:middle;">{{object.clase}}</td>
     <td style="vertical-align:middle;">
-        <a href="{{entrenador.url_img}}" target="_blank">
-        <img src="{{entrenador.url_img}}" width="100"></a>
+        <a href="{{object.url_img}}" target="_blank">
+        <img src="{{object.url_img}}" width="100"></a>
     </td>
-
-    <!-- Update,Erase -->
     <td style="vertical-align:middle;">
 
-        <a href="{% url 'EliminarEntrenador' entrenador.nombre %}">Borrar</a>
-        <a href="{% url 'EditarEntrenador' entrenador.nombre %}">Editar</a>
+        <a href="{% url 'EliminarEntrenador' object.nombre %}">Borrar</a>
+        <a href="{% url 'EditarEntrenador' object.nombre %}">Editar</a>
     </td>
-
-</tr>
-{% endfor %}
-{% else %}
-<div class="alert alert-danger mt-5" role="alert">
-    No hay Entrenadores registrados aún
-</div>
-{% endif %}
-</tbody>
-</table>
-
 {% endblock %}

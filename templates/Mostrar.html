@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block cambios %}
+
+<table class="table text-center">
+    <thead>
+        <tr>
+            {% for title in titles %}
+            <th scope="col">{{title}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+
+    <tbody>
+{% if objects %}
+
+{% for object in objects %}
+<tr>
+    <!-- Llenado de las columnas -->
+    {% block columnas %}
+    
+    {% endblock %}    
+    
+    
+    
+    
+    <!-- Imagen -->
+    
+
+</tr>
+{% endfor %}
+{% else %}
+<div class="alert alert-danger mt-5" role="alert">
+    No hay registro de {{clase}} aún
+</div>
+{% endif %}
+</tbody>
+</table>
+
+{% endblock %}

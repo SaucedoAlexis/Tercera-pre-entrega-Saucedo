@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+  {% load static %}
+
+{% block cambios %}
+
+<section class="page-section portfolio" id="{% url 'EditarPokemon' nombre %}">
+    <div class="container">
+        <!-- Portfolio Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Editar un Pokemon</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+    </div>
+</section>
+    <div class="container text-center ">
+        
+    <form action="{% url 'EditarPokemon' nombre %}" method="POST">
+            {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Editar">
+    </form>
+
+    </div>
+
+
+{% endblock %}

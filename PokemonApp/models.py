@@ -8,8 +8,10 @@ class Pokemon(Model):
     id = IntegerField(primary_key=True, unique=True)
     nombre = CharField(max_length=40)
     tipo1 = CharField(max_length=40)
-    tipo2 = CharField(max_length=40, default=None)
+    tipo2 = CharField(max_length=40)
     url_img = URLField(max_length=200)
+
+    
 
 
 class Entrenador(Model):

@@ -1,44 +1,22 @@
-{% extends "base.html" %}
+{% extends "Mostrar.html" %}
 
-{% block cambios %}
-<table class="table text-center">
-    <thead>
-    <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Tipo 1</th>
-        <th scope="col">Tipo 2</th>
-        <th scope="col">Imagen</th>
-        
+{% block columnas %}
 
-    </tr>
-    </thead>
-
-    <tbody>
-{% if pokemons %}
-
-{% for pokemon in pokemons %}
-<tr>
-    <!-- Llenado de las columnas -->
-    <th scope="row" style="vertical-align:middle;">{{pokemon.id}}</th>
-    <td style="vertical-align:middle;">{{pokemon.nombre}}</td>
-    <td style="vertical-align:middle;">{{pokemon..tipo1}}</td>
-    <td style="vertical-align:middle;">{{pokemon.tipo2}}</td>
-    
-    <!-- Imagen -->
+    <th scope="row" style="vertical-align:middle;">{{object.id}}</th>
+    <td style="vertical-align:middle;">{{object.nombre}}</td>
+    <td style="vertical-align:middle;">{{object.tipo1}}</td>
+    <td style="vertical-align:middle;">{{object.tipo2}}</td>
     <td style="vertical-align:middle;">
-        <a href="{{pokemon.url_img}}" target="_blank">
-        <img src="{{pokemon.url_img}}" width="100"></a>
+        <a href="{{object.url_img}}" target="_blank">
+        <img src="{{object.url_img}}" width="100"></a>
     </td>
+    <td style="vertical-align:middle;">
 
-</tr>
-{% endfor %}
-{% else %}
-<div class="alert alert-danger mt-5" role="alert">
-    No hay Pokemons registrados aún
-</div>
-{% endif %}
-</tbody>
-</table>
+        <a href="{% url 'EliminarPokemon' object.nombre %}">Borrar</a>
+        <a href="{% url 'EditarPokemon' object.nombre %}">Editar</a>
+    </td>
+    
 
+    
 {% endblock %}
+

@@ -7,7 +7,10 @@ from PokemonApp.models import Pokemon, Entrenador, Region
 
 # Create your views here.
 # Pokemons
-
+def eliminar_Pokemon(request,nombre):
+    get_pokemon = Pokemon.objects.get(nombre=nombre)
+    get_pokemon.delete()
+    return redirect('MostrarPokemons')
 
 def encontrar_pokemon(request):
     
@@ -52,7 +55,44 @@ def ingresar_pokemon(request):
 
 def mostrar_pokemons(request):
     all_pokemons = Pokemon.objects.all()
-    return render(request,'PokemonApp/Pokemon/Mostrar_Pokemons.html', {'pokemons':all_pokemons})
+    context = {
+        'objects': all_pokemons,
+        'titles': ['Id','Nombre','Tipo 1', 'Tipo 2',
+                    'Imagen','Acciones'],
+        'clase': 'Pokémon'
+        
+    }
+    return render(request,'PokemonApp/Pokemon/Mostrar_Pokemons.html', context)
+
+def editar_pokemon(request,nombre):
+    get_pokemon = Pokemon.objects.get(nombre=nombre) #Cuando no entra por el post, este get captura todos los datos
+    if request.method == 'POST':#si entra por post cuando completamos la edición se valida y se modifica
+        formulario = PokemonFormulario(request.POST)
+
+        if formulario.is_valid():
+            data = formulario.cleaned_data
+            
+            
+            get_pokemon.nombre = data['nombre']
+            get_pokemon.tipo1 = data['tipo1']
+            get_pokemon.tipo2 = data['tipo2']
+            get_pokemon.url_img = data['url_img']
+            
+                                    
+            get_pokemon.save()
+        
+        return redirect('MostrarPokemons')
+    
+    context = {
+        'nombre': get_pokemon.nombre,#Parámetro del view para ir a la URL
+        'form':PokemonFormulario(initial={#form para precargar los datos
+        "nombre": get_pokemon.nombre,
+        "tipo1": get_pokemon.tipo1,
+        "tipo2": get_pokemon.tipo2,        
+        "url_img": get_pokemon.url_img
+        })
+    }
+    return render(request, 'PokemonApp/Pokemon/Editar_Pokemon.html', context=context)
 #Fin Pokemons
 
 #Comienzo Entrenadores
@@ -63,10 +103,17 @@ def eliminar_entrenador(request,nombre):
     return redirect('MostrarEntrenadores')
 
 def mostrar_entrenadores(request):
-    all_trainers = Entrenador.objects.all()
+   
+    context = {
+        'objects': Entrenador.objects.all(),
+        'titles': ['Nombre', 'Genero', 'Región',
+                   'Clase','Imagen','Acciones'],
+        'clase': 'Entrenadores',
+        'eliminarobject': 'EliminarEntrenador'
+    }
     return render(request,
                    'PokemonApp/Entrenador/Mostrar_Entrenadores.html',
-                    {'entrenadores':all_trainers})
+                    context=context)
 
 def busqueda_entrenador(request):
     return render(request, 
@@ -106,25 +153,26 @@ def ingresar_entrenador(request):
     return render(request, 'PokemonApp/Entrenador/Formulario_Entrenador.html', {'form':EntrenadorFormulario()})
 
 def editar_entrenador(request,nombre):
-
-    if request.method == 'POST':
+    get_entrenador = Entrenador.objects.get(nombre=nombre) #Cuando no entra por el post, este get captura todos los datos
+    if request.method == 'POST':#si entra por post cuando completamos la edición se valida y se modifica
         formulario = EntrenadorFormulario(request.POST)
 
         if formulario.is_valid():
             data = formulario.cleaned_data
-            entrenador = Entrenador(nombre=data['nombre'], genero=data['genero'],
-                                    region=data['region'], clase=data['clase'],
-                                    url_img=data['url_img']
-                                    )
-            entrenador.save()
-
-
-    
+            get_entrenador.nombre=data['nombre']
+            get_entrenador.genero=data['genero']
+            get_entrenador.region=data['region']
+            get_entrenador.clase=data['clase']
+            
+            get_entrenador.url_img=data['url_img']
+                                    
+            get_entrenador.save()
         
         return redirect('MostrarEntrenadores')
-    get_entrenador = Entrenador.objects.get(nombre=nombre)
+    
     context = {
-        'form':EntrenadorFormulario(initial={
+        'nombre': get_entrenador.nombre,#Parámetro del view para ir a la URL
+        'form':EntrenadorFormulario(initial={#form para precargar los datos
         "nombre": get_entrenador.nombre,
         "genero": get_entrenador.genero,
         "region": get_entrenador.region,
@@ -132,10 +180,53 @@ def editar_entrenador(request,nombre):
         "url_img": get_entrenador.url_img
         })
     }
-    return render(request, 'PokemonApp/Entrenador/Formulario_Entrenador.html', context=context)
+    return render(request, 'PokemonApp/Entrenador/Editar_entrenador.html', context=context)
 #Fin Entrenadores
 
 #Comienzo Regiones
+
+def editar_region(request,nombre):
+    get_region = Region.objects.get(nombre=nombre)
+    if request.method == 'POST':
+        form = RegionFormulario(request.POST)
+        if form.is_valid():
+
+            data = form.cleaned_data
+
+            get_region.nombre = data['nombre']
+            get_region.profesor = data['profesor']
+            get_region.villanos = data['villanos']
+            get_region.capital = data['capital']
+            get_region.liga_pokemon = data['liga_pokemon']
+            get_region.url_img = data['url_img']
+            
+            get_region.save()
+
+            return redirect('MostrarRegiones')
+
+    
+    context = {
+        'nombre': get_region.nombre,#Parámetro del view para ir a la URL
+
+        'form':RegionFormulario(initial={#form para precargar los datos
+        "nombre": get_region.nombre,
+        "profesor": get_region.profesor,
+        "villanos": get_region.villanos,
+        "capital": get_region.capital,
+        "liga_pokemon": get_region.liga_pokemon,
+        "url_img": get_region.url_img
+        }),
+
+
+
+    }
+    return render(request, 'PokemonApp/Region/Editar_Region.html', context=context)
+
+def eliminar_region(request,nombre):
+    get_region = Region.objects.get(nombre=nombre)
+    get_region.delete()
+    return redirect('MostrarRegiones')
+
 def busqueda_region(request):
     return render(request,
                   'PokemonApp/Region/Busqueda_Region.html',
@@ -177,10 +268,16 @@ def ingresar_region(request):
                  )
 
 def mostrar_regiones(request):
-    all_regions = Region.objects.all()
+    
+    context = {
+        'objects': Region.objects.all(),
+        'titles': ['Nombre','Profesor','Villanos','Capital',
+                   'Liga Pokémon','Imagen','Acciones'],
+        'clase': 'Region'
+    }
     return render(request,
                   'PokemonApp/Region/Mostrar_Regiones.html',
-                  {'regiones':all_regions})
+                  context = context)
 #Fin regiones
 def buscar(request):
     context = {

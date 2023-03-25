@@ -1,43 +1,22 @@
-{% extends 'base.html' %}
-{% block cambios %}
+{% extends "Mostrar.html" %}
 
-    <table class="table text-center">
-        <thead>
-        <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Profesor</th>
-            <th scope="col">Villanos</th>
-            <th scope="col">Capital</th>
-            <th scope="col">Liga Pokémon</th>
-            <th scope="col">Mapa</th>
-    
-        </tr>
-        </thead>
-    
-        <tbody>
-        {% if regiones %}
-        {% for region in regiones %}
-        <tr>
-            <!-- Llenado de las columnas -->
-            <th scope="row" style="vertical-align:middle;">{{region.nombre}}</th>
-            <td style="vertical-align:middle;">{{region.profesor}}</td>
-            <td style="vertical-align:middle;">{{region.villanos}}</td>
-            <td style="vertical-align:middle;">{{region.capital}}</td>
-            <td style="vertical-align:middle;">{{region.liga_pokemon}}</td>
-            <!-- Imagen -->
-            <td style="vertical-align:middle;">
-                <a href="{{region.url_img}}" target="_blank">
-                <img src="{{region.url_img}}" width="100"></a>
-            </td>
-    
-        </tr>
-        {% endfor %}
-        {% else %}
-        <div class="alert alert-danger mt-5" role="alert">
-            No hay Regiones aún
-        </div>
-        {% endif %}
-        </tbody>
-    </table>
+{% block columnas %}
 
+    <th scope="row" style="vertical-align:middle;">{{object.nombre}}</th>
+    <td style="vertical-align:middle;">{{object.profesor}}</td>
+    <td style="vertical-align:middle;">{{object.villanos}}</td>
+    <td style="vertical-align:middle;">{{object.capital}}</td>
+    <td style="vertical-align:middle;">{{object.liga_pokemon}}</td>
+    <td style="vertical-align:middle;">
+        <a href="{{object.url_img}}" target="_blank">
+        <img src="{{object.url_img}}" width="100"></a>
+    </td>
+    <td style="vertical-align:middle;">
+
+        <a href="{% url 'EliminarRegion' object.nombre %}">Borrar</a>
+        <a href="{% url 'EditarRegion' object.nombre %}">Editar</a>
+    </td>
+    
+
+    
 {% endblock %}

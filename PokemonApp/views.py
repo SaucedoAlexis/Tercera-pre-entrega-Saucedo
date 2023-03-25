@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 
-from PokemonApp.forms import PokemonFormulario, EntrenadorFormulario, RegionFormulario, \
+from PokemonApp.forms import PokemonFormulario, EntrenadorFormulario, PokemonRegistrar, RegionFormulario, \
     BusquedaPokemonFormulario, BusquedaEntrenadorFormulario, BusquedaRegionFormulario
 from PokemonApp.models import Pokemon, Entrenador, Region
 
@@ -23,7 +23,8 @@ def encontrar_pokemon(request):
         context = {
             'form_busqueda_pokemon': BusquedaPokemonFormulario(),
             # variable para usar en el template y sus datos asignados
-            'pokemons': pokemon_filtrado
+            'objects': pokemon_filtrado,
+            'clase': 'Pokemon'
         }
         return render(request, 'PokemonApp\Pokemon\Resultado_Busqueda_Pokemon.html', context=context)
     
@@ -33,7 +34,7 @@ def busqueda_pokemon(request):
 def ingresar_pokemon(request):
 
     if request.method == 'POST': #condicional del método usado
-        formulario = PokemonFormulario(request.POST) #obtención de datos del request
+        formulario = PokemonRegistrar(request.POST) #obtención de datos del request
         if formulario.is_valid(): #validación de los datos
             data = formulario.cleaned_data #limpieza y transformación a dict
             pokemon = Pokemon(id=int(data['id']), nombre=data['nombre'], tipo1=data['tipo1'],
@@ -44,14 +45,16 @@ def ingresar_pokemon(request):
 
 
         context = {
-            'form': PokemonFormulario(),
-            'msg': 'Ok'
+            'form': PokemonRegistrar(),
+            'msg': 'Ok',
+            'clase': 'Pokémon'
         } # variables y asignación de datos para el uso en el template
 
 
         return render(request, 'PokemonApp/Pokemon/Formulario_Pokemon.html', context=context)
 
-    return render(request, 'PokemonApp/Pokemon/Formulario_Pokemon.html', context={'form':PokemonFormulario()})
+    return render(request, 'PokemonApp/Pokemon/Formulario_Pokemon.html', context={'form':PokemonRegistrar(),
+                                                                                  'clase': 'Pokémon'})
 
 def mostrar_pokemons(request):
     all_pokemons = Pokemon.objects.all()
@@ -118,7 +121,10 @@ def mostrar_entrenadores(request):
 def busqueda_entrenador(request):
     return render(request, 
                   'PokemonApp/Entrenador/Busqueda_entrenador.html',
-                  {'form_busqueda':BusquedaEntrenadorFormulario()})
+                  {'form_busqueda':BusquedaEntrenadorFormulario(),
+                   }
+                  
+                  )
 
 def encontrar_entrenador(request):
     formulario = BusquedaEntrenadorFormulario(request.GET)
@@ -126,7 +132,8 @@ def encontrar_entrenador(request):
         data = formulario.cleaned_data
         entrenador_filtrado = Entrenador.objects.filter(nombre__icontains=data['nombre'])
         context = {
-            'entrenadores': entrenador_filtrado
+            'objects': entrenador_filtrado,
+            'clase': 'Entrenador'
         }
         return render(request, 'PokemonApp/Entrenador/Resultado_Busqueda_Entrenador.html', context=context)
 
@@ -148,9 +155,11 @@ def ingresar_entrenador(request):
         context = {
             'msg': 'Ok',
             'form': EntrenadorFormulario(),
+            'clase': 'Entrenador'
         }
         return render(request, 'PokemonApp/Entrenador/Formulario_Entrenador.html', context=context)
-    return render(request, 'PokemonApp/Entrenador/Formulario_Entrenador.html', {'form':EntrenadorFormulario()})
+    return render(request, 'PokemonApp/Entrenador/Formulario_Entrenador.html', 
+                  {'form':EntrenadorFormulario(), 'clase': 'Entrenador'})
 
 def editar_entrenador(request,nombre):
     get_entrenador = Entrenador.objects.get(nombre=nombre) #Cuando no entra por el post, este get captura todos los datos
@@ -238,7 +247,8 @@ def encontrar_region(request):
         data = formulario.cleaned_data
         region_filtrada = Region.objects.filter(nombre__icontains=data['nombre'])
         context = {
-            'regiones': region_filtrada
+            'objects': region_filtrada,
+            'clase': 'Región'
         }
     return render(request, 'PokemonApp/Region/Resultado_Busqueda_Region.html', context=context)
 
@@ -259,12 +269,13 @@ def ingresar_region(request):
         context = {
             
             'form': RegionFormulario(),
-            'msg': 'Ok'
+            'msg': 'Ok',
+            'clase': 'Región'
         }
         return render(request, 'PokemonApp/Region/Formulario_Region.html',context=context)
     
     return render(request, 'PokemonApp/Region/Formulario_Region.html',
-                  {'form':RegionFormulario()}
+                  {'form':RegionFormulario(), 'clase': 'Región'}
                  )
 
 def mostrar_regiones(request):

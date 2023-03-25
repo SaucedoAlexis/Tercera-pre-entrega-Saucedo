@@ -8,6 +8,11 @@ class PokemonFormulario(forms.ModelForm):
         model = Pokemon
         fields = ['nombre','tipo1','tipo2','url_img']
 
+class PokemonRegistrar(forms.ModelForm):
+    class Meta:
+        model = Pokemon
+        fields = '__all__'
+
 class EntrenadorFormulario(forms.ModelForm):
     class Meta:
         model = Entrenador

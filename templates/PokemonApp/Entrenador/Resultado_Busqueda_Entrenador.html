@@ -1,31 +1,9 @@
-{% extends "base.html" %}
+{% extends 'Resultado_Busqueda.html' %}
 
-{% block cambios %}
-    {% if entrenadores %}
-        {% for entrenador in entrenadores %}
-            <div class="container text-center">
-              <div class="row">
-                <div class="col" >
-                  <ul class="list-group" style="margin-top:5rem">
-                      <li class="list-group-item">Nombre: {{entrenador.nombre}}</li>
-                      <li class="list-group-item">Genero: {{entrenador.genero}}</li>
-                      <li class="list-group-item">Region: {{entrenador.region}}</li>
-                      <li class="list-group-item">Clase: {{entrenador.clase}}</li>
+{% block columnas %}
+<li class="list-group-item">Nombre: {{object.nombre}}</li>
+<li class="list-group-item">Genero: {{objectr.genero}}</li>
+<li class="list-group-item">Region: {{object.region}}</li>
+<li class="list-group-item">Clase: {{object.clase}}</li>
 
-
-                  </ul>
-                </div>
-                <div class="col">
-                    <a href="{{entrenador.url_img}}" target="_blank">
-                  <img src="{{entrenador.url_img}}" class="img-fluid" style='margin-top:4rem' width="200px" alt="Imagen del Entrenador">
-                    </a>
-                </div>
-              </div>
-            </div>
-        {% endfor %}
-    {% else %}
-        <div class="alert alert-danger mt-5" role="alert">
-          No se ha Encontrado ningún Entrenador con ese nombre
-        </div>
-    {% endif %}
 {% endblock %}

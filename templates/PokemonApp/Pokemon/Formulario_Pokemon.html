@@ -1,35 +1,5 @@
-{% extends "base.html" %}
-  {% load static %}
+{% extends 'Formulario.html '%}
 
-{% block cambios %}
-{% if msg%}
-    <div class="alert alert-success" role="alert">
-        Pokemon registrado Exitosamente
-    </div>
-{% endif %}
-
-<section class="page-section portfolio" id="{% url 'Pokemon' %}">
-    <div class="container">
-        <!-- Portfolio Section Heading-->
-        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Registar un Pokémon</h2>
-        <!-- Icon Divider-->
-        <div class="divider-custom">
-            <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-            <div class="divider-custom-line"></div>
-        </div>
-    </div>
-</section>
-    <div class="container text-center ">
-
-    <form action="{% url 'Pokemon' %}" method="post" >
-          {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Guardar">
-    </form>
-
-    </div>
-
-
-
+{% block form %}
+    <form action="{% url 'IngresarPokemon' %}" method="post" >   
 {% endblock %}

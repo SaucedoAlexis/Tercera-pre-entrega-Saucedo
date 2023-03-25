@@ -1,29 +1,13 @@
-{% extends "base.html" %}
+{% extends 'Resultado_Busqueda.html' %}
 
-{% block cambios %}
-    {% if regiones %}
-        {% for region in regiones %}
-            <div class="container text-center">
-              <div class="row">
-                <div class="col" >
-                  <ul class="list-group" style="margin-top:4rem">
-                      <li class="list-group-item">Nobre: {{region.nombre}}</li>
-                      <li class="list-group-item">Profesor: {{region.profesor}}</li>
-                      <li class="list-group-item">Villanos: {{region.villanos}}</li>
-                      <li class="list-group-item">Capital: {{region.capital}}</li>
-                      <li class="list-group-item">Liga Pokémon: {{region.liga_pokemon}}</li>
+{% block columnas %}
 
-                  </ul>
-                </div>
-                <div class="col">
-                  <a href="{{region.url_img}}" target="_blank"><img src="{{region.url_img}}" class="img-fluid" style='margin-top:1rem' width="400px" alt="Imagen del pokemon"></a>
-                </div>
-              </div>
-            </div>
-        {% endfor %}
-    {% else %}
-        <div class="alert alert-danger mt-5" role="alert">
-          No se ha encontrado ninguna región con ese nombre
-        </div>
-    {% endif %}
+<li class="list-group-item">Nombre: {{object.nombre}}</li>
+<li class="list-group-item">Profesor: {{object.profesor}}</li>
+<li class="list-group-item">Villanos: {{object.villanos}}</li>
+<li class="list-group-item">Capital: {{object.capital}}</li>
+<li class="list-group-item">Liga Pokemon: {{object.liga_pokemon}}</li>
+
+
+
 {% endblock %}

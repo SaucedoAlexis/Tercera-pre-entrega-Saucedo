@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block cambios %}
+    {% if objects %}
+        {% for object in objects %}
+            <div class="container text-center">
+              <div class="row">
+                <div class="col" >
+                  <ul class="list-group" style="margin-top:5rem">
+                    {% block columnas %}
+                      <li class="list-group-item">Nombre: {{object.nombre}}</li>
+                      <li class="list-group-item">Genero: {{object.genero}}</li>
+                      <li class="list-group-item">Region: {{object.region}}</li>
+                      <li class="list-group-item">Clase: {{object.clase}}</li>
+                    {% endblock %}
+                    
+
+                  </ul>
+                </div>
+                <div class="col">
+                    <a href="{{object.url_img}}" target="_blank">
+                  <img src="{{object.url_img}}" class="img-fluid" style='margin-top:4rem' width="200px" alt="Imagen {clase}">
+                    </a>
+                </div>
+              </div>
+            </div>
+           
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-danger mt-5" role="alert">
+            {% if clase == 'Región'%}
+            No se ha encontrado una {{clase}} con este nombre
+            {% else %}
+            No se ha encontrado un {{clase}} con este nombre
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

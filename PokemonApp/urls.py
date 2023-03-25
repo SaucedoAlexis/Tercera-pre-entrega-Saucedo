@@ -9,7 +9,7 @@ urlpatterns = [
     path('busqueda_pokemon', encontrar_pokemon, name='EncontrarPokemon'),
     path('Mostrar_Pokemons', mostrar_pokemons,name='MostrarPokemons'),
     path('mostrar_pokemon/editar/<nombre>', editar_pokemon ,name='EditarPokemon'),
-    path('pokemon', ingresar_pokemon, name='Pokemon'),
+    path('ingresar_pokemon', ingresar_pokemon, name='IngresarPokemon'),
     path('mostrar_pokemon/eliminar/<nombre>', eliminar_Pokemon ,name='EliminarPokemon'),
     
     #Entrenadores

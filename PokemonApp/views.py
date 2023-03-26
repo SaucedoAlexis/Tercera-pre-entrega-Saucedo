@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.contrib.auth.decorators import login_required
 
 from PokemonApp.forms import PokemonFormulario, EntrenadorFormulario, PokemonRegistrar, RegionFormulario, \
     BusquedaPokemonFormulario, BusquedaEntrenadorFormulario, BusquedaRegionFormulario
@@ -136,7 +137,7 @@ def encontrar_entrenador(request):
             'clase': 'Entrenador'
         }
         return render(request, 'PokemonApp/Entrenador/Resultado_Busqueda_Entrenador.html', context=context)
-
+@login_required
 def ingresar_entrenador(request):
 
     if request.method == 'POST':
